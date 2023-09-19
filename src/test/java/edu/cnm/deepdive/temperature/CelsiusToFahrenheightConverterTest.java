@@ -3,20 +3,16 @@ package edu.cnm.deepdive.temperature;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 class CelsiusToFahrenheightConverterTest {
 
-  @Test
-  void convert() {
-    assertEquals(32, new CelsiusToFahrenheightConverter().convert( 0),
+  @ParameterizedTest
+  @CsvFileSource(resources = "c-to-f.csv", useHeadersInDisplayName = true)
+  void convert(double celsius, double expectedFahrenheight) {
+    assertEquals(expectedFahrenheight, new CelsiusToFahrenheightConverter().convert(celsius),
         0.00001);
-    assertEquals(212, new CelsiusToFahrenheightConverter().convert( 100),
-        0.00001);
-    assertEquals(-40, new CelsiusToFahrenheightConverter().convert( -40),
-        0.00001);
-
-
-
 
   }
 }
